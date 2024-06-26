@@ -1,0 +1,67 @@
+ class GfG {
+    
+    boolean path(Node root, int find,ArrayList<Node> a)
+    {
+        if(root == null)
+        {
+            return false;
+        }
+        a.add(root);
+        if(root.data == find)
+        {
+            return true;
+        }
+        boolean l = path(root.left,find,a);
+        boolean r =path(root.right,find,a);
+        if(l||r)
+        {
+            return true;
+        }
+        a.remove(a.size()-1);
+        return false;
+    }
+    Node findca(Node root,int a,int b)
+    {
+        ArrayList<Node> a1=new ArrayList<>();
+        ArrayList<Node> a2=new ArrayList<>();
+        path(root,a,a1);
+        path(root,b,a2);
+        Node ca=null;
+        for(int i=0;i<a1.size()&&i<a2.size();i++)
+        {
+            if(a1.get(i)!=a2.get(i))
+            {
+                break;
+            }
+            ca=a1.get(i);
+        }
+        return ca;
+    }
+    int dist(Node root, int finds)
+    {
+        if(root == null)
+        {
+            return -1;
+        }
+        if(root.data == finds)
+        {
+            return 0;
+        }
+        int l=dist(root.left,finds);
+          if (l != -1) {
+            return l + 1;
+        }
+        int r=dist(root.right,finds);
+         if (r != -1) {
+            return r + 1;
+        }
+        return -1;
+    }
+    int findDist(Node root, int a, int b) {
+        Node rootc=findca(root,a,b);
+        int Dist1=dist(rootc,a);
+        int Dist2=dist(rootc,b);
+        int finddists=Dist1+Dist2;
+        return finddists;
+    }
+}
