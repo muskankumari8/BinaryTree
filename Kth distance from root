@@ -1,0 +1,24 @@
+// Kth distance from root                                                                                           class Tree
+{
+    ArrayList<Integer> Kthlevel(Node root,int k,int level,ArrayList<Integer> lt)
+    {
+        if(root==null){
+            return lt;
+        }
+          if(level==k)
+          {
+              lt.add(root.data);
+          }
+          Kthlevel(root.left,k,level+1,lt);
+          Kthlevel(root.right,k,level+1,lt);
+          return lt;
+    }
+     // Recursive function to print right view of a binary tree.
+     ArrayList<Integer> Kdistance(Node root, int k)
+     {
+         ArrayList<Integer> lt = new ArrayList<>();
+         Kthlevel(root,k,0,lt);
+         return lt;
+          
+     }
+}
