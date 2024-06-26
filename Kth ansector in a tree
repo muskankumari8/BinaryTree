@@ -1,0 +1,29 @@
+class Solution
+{
+    public boolean findPath(Node root,int node, ArrayList<Node> a){
+        if(root == null){
+            return false;
+        }
+        a.add(root);
+        if(root.data==node){
+            return true;
+        }
+        boolean l = findPath(root.left,node,a);
+        boolean r = findPath(root.right,node,a);
+        if(l||r){
+            return true;
+        }
+        a.remove(a.size()-1);
+        return false;
+    }
+    public int kthAncestor(Node root, int k, int node)
+    {
+        ArrayList<Node> l = new ArrayList<>();
+        findPath(root,node,l);
+        if(l.size()<=k){
+            return -1;
+        }
+        return l.get(l.size() - k - 1).data;
+        //Write your code here
+    }
+}
